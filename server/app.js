@@ -18,12 +18,6 @@ const { damageCalculation } = require('../game-logic.js');
 const dist = path.join(__dirname, '/../client/dist');
 
 
-// This line sets the environment variables, since we are on our local machines
-// Therefore, in production (or whenever we are hosted on an actual server),
-//   this line can be removed along with the .env file
-require('dotenv') // same as const dotenv = require('dotenv');
-  .config(); // we just want to call .config, not save
-  
 
 /* ======================== MIDDLEWARE ======================== */
 

@@ -1,10 +1,12 @@
 const Sequelize = require('sequelize');
+const rgx = new RegExp(/postgres:\/\/([^:]+):([^@]+)@([^:]+):(\d+)\/(.+)/);
+const match = process.env.DATABASE_URL ? process.env.DATABASE_URL.match(rgx) : 'postgres://wairrcwaikkuob:b6f7a04b36dc888549bcedd0c99f7cec9c18eb3e83bda91f24bd31fbe60eba50@ec2-50-16-199-246.compute-1.amazonaws.com:5432/d10sjl0jdmpqhu'.match(rgx);
 
-const sequelize = new Sequelize(process.env.DB_DATABASE, process.env.DB_USERNAME, process.env.DB_PASSWORD, {
+sequelize = new Sequelize(match[5], match[1], match[2], {
     dialect:  'postgres',
     protocol: 'postgres',
-    port:     process.env.DB_PORT,
-    host:     process.env.DB_HOST,
+    port:     match[4],
+    host:     match[3],
     logging: false,
     dialectOptions: {
         ssl: true
@@ -124,7 +126,7 @@ module.exports = {
 // const { Client } = require('pg');
 
 // const client = new Client({
-//   connectionString: process.env.DATABASE_URL || ' ****REDACTED**** ',
+//   connectionString: process.env.DATABASE_URL || 'postgres://wairrcwaikkuob:b6f7a04b36dc888549bcedd0c99f7cec9c18eb3e83bda91f24bd31fbe60eba50@ec2-50-16-199-246.compute-1.amazonaws.com:5432/d10sjl0jdmpqhu',
 //   ssl: true,
 // });
 

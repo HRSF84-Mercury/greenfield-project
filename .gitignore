@@ -27,7 +27,5 @@ client/dist/bundle.js
 # Deployed apps should consider commenting these lines out:
 # see https://npmjs.org/doc/faq.html#Should-I-check-my-node_modules-folder-into-git
 
-.env
 node_modules
 bower_components
-config.codekit3
