@@ -8,12 +8,13 @@ const Pokemon = (props) => {
     } else {
       return css.staticAnimation;
     }
-  }
+  };
+
   return (
     <div>
-      <img className={classes()} src={props.sprite} style={{minWidth: '200px'}} alt="pikachu" />
+      <img className={classes()} src={props.sprite} style={{ minWidth: '200px' }} alt="pikachu" />
     </div>
-  )
-}
+  );
+};
 
 export default Pokemon;

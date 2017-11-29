@@ -6,10 +6,10 @@
 // Terminal is setup not to scroll with new messages if you are not scrolled to the bottom already
 // This allows a user to read old commands
 // componentWillReceiveProps (aka when a new message is coming in), the user's scroll position is determined
-  // It also determines if the new message banner should appear (only when the user isn't scrolled to the bottom)
+// It also determines if the new message banner should appear (only when the user isn't scrolled to the bottom)
 // componentDidUpdate does the actual scrolling if it's been determined the div should scroll with the new message
 // TextareaAutosize is a 3rd party component that's been configured and styled to look like an input field but expand in height as the user types
-  // Styles are not perfect, but for most cases it expands as wanted
+// Styles are not perfect, but for most cases it expands as wanted
 
 import React, { Component } from 'react';
 import css from '../styles.css';
@@ -36,8 +36,8 @@ export default class Terminal extends Component {
           shouldScroll: false,
           showNewMessageBanner: true
         });
-        setTimeout(function() {
-          this.setState({showNewMessageBanner: false});
+        setTimeout(function () {
+          this.setState({ showNewMessageBanner: false });
         }.bind(this), 2000);
       }
     }
@@ -45,8 +45,8 @@ export default class Terminal extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     // check to see if there are new messages incoming
-      // if there are new messages, and the user is at the bottom of the message log scroll
-        // then scroll down to show the message
+    // if there are new messages, and the user is at the bottom of the message log scroll
+    // then scroll down to show the message
     if (prevProps.commandArray.length !== this.props.commandArray.length) {
       let commandLogContainer = document.getElementsByClassName(css.commandLogContainer)[0];
       if (this.state.shouldScroll) {
@@ -64,11 +64,11 @@ export default class Terminal extends Component {
               <div key={i} className={css.commandInstance}>
                 {command.command}
               </div>
-            )
+            );
           })}
         </div>
         <TextareaAutosize className={css.commandInput} value={this.props.commandInput} onKeyDown={this.props.handleCommands} onChange={(e) => this.props.handleInputChange(e, 'commandInput')} />
       </div>
-    )
+    );
   }
 }

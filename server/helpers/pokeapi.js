@@ -5,7 +5,7 @@
 //  Things to consider:
 //    -More than 10 requests to the pokeapi will result in a 504 timeout error (per my experience).
 //    -I filled the DB by manually calling this function, each time making only 10 requests (refactor to recursive or setTimeout if needed).
-//    -You should only need to fill up your DB with all the pokemon you plan to incorporate once. 
+//    -You should only need to fill up your DB with all the pokemon you plan to incorporate once.
 //    -The api is free to use but only 300 requests per resource per day are permitted e.g. bulbasaur can be requested 300 times per day.
 //2) checkForPokemon:
 //     a function that checks how many pokemon rows are in the pokemon table. If there are less rows than the number
@@ -14,10 +14,10 @@ const axios = require('axios');
 const Promise = require('bluebird');
 const db = '../../database/db.js';
 
-const fetchFirst151Pokemon = (callback, pokemonStoredSoFar) => {  
-  let arrayOfRequests = []
+const fetchFirst151Pokemon = (callback, pokemonStoredSoFar) => {
+  let arrayOfRequests = [];
   //you WILL get a 504 error if you try to process a large number of requests. I did increments of 10.
-  for(let i = pokemonStoredSoFar; i <= pokemonStoredSoFar + 10; i++) {
+  for (let i = pokemonStoredSoFar; i <= pokemonStoredSoFar + 10; i++) {
     arrayOfRequests.push(axios.get(`https://pokeapi.co/api/v2/pokemon/${i}/`));
     console.log('A REQUEST WITH ID: ', i);
   }
@@ -30,9 +30,9 @@ const fetchFirst151Pokemon = (callback, pokemonStoredSoFar) => {
         pokemonObj.types = [];
 
         promise.data.types.forEach((typeObj) => {
-          pokemonObj.types[typeObj.slot - 1] = typeObj.type.name
+          pokemonObj.types[typeObj.slot - 1] = typeObj.type.name;
         });
-        
+
         pokemonObj.name = promise.data.name;
         pokemonObj.id = promise.data.id;
         pokemonObj.baseHealth = promise.data.stats[5].base_stat;
@@ -47,8 +47,8 @@ const fetchFirst151Pokemon = (callback, pokemonStoredSoFar) => {
     })
     .catch((err) => {
       console.log('POKEMON FETCH ERROR: ', err);
-    });   
-}
+    });
+};
 
 
 const checkForPokemon = (callback) => {
@@ -57,15 +57,15 @@ const checkForPokemon = (callback) => {
       if (data.length < 151) {
         console.log('There are less than 151 pokemon in the DB!');
         console.log('NUMBER POKES IN DB: ', data.length);
-        callback(db.savePokemon, data.length); 
+        callback(db.savePokemon, data.length);
       } else {
         console.log('All 151 pokemon are already in the DB!');
         console.log('NUMBER POKES IN DB: ', data.length)
       }
-    })
-  }
+    });
+};
 
 module.exports = {
   fetchFirst151Pokemon: fetchFirst151Pokemon,
   checkForPokemon: checkForPokemon
-}
+};
