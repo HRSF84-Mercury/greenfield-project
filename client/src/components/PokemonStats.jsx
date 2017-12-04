@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import css from '../PokemonStats.css';
 
-const pokemonTypesAnimations = {
-
-};
-
 const PokemonStats = (props) => {
   const damage = props.stats.health / props.stats.initialHealth;
 
